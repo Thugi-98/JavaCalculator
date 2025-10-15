@@ -1,11 +1,11 @@
 import java.util.Scanner;
+import method.Calculator;
 
 public class Main {
     public static void main(String[] args) {
 
-        // 스캐너와 결과 변수 생성
+        // 스캐너 생성
         Scanner scanner = new Scanner(System.in);
-        int result = 0;
 
         // 반복문 생성
         while (true) {
@@ -19,30 +19,18 @@ public class Main {
             System.out.print("사칙연산 기호를 입력하세요: ");
             char c = scanner.next().charAt(0);
 
-            // 사칙연산 기호에 따른 결과값 계산
-            switch(c) {
-                case '+':
-                    result = a + b;
-                    break;
-                case '-':
-                    result = a - b;
-                    break;
-                case '*':
-                    result = a * b;
-                    break;
-                case '/':
-                    if(b == 0) { System.out.println("오류입니다."); }
-                    result = a / b;
-                    break;
+            Calculator cal = new Calculator();
 
-                // 정상적인 사칙연산 기호가 아닐 경우
-                default:
-                    System.out.println("오류입니다.");
-                    break;
-            }
+            // 결과값 출력 전 정상적인 연산인지 검증
+            if (c != '+' && c != '-' && c != '*' && c != '/')
+                System.out.println("잘못된 사칙연산 기호입니다.");
+            else if (b == 0 && c == '/')
+                System.out.println("0으로는 나눌 수 없습니다.");
 
-            // 결과값 출력
-            System.out.println("결과: " + result);
+            // 정상적인 연산일 경우 결과 출력
+            else
+                System.out.println("결과: " + cal.calculate(a, b, c));
+
 
             // 반복문 종료 여부 확인
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
