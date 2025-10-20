@@ -1,25 +1,28 @@
 import java.util.Scanner;
+
 import method.Calculator;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
 
         // 스캐너 생성
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+
+        Calculator cal = new Calculator();
+
+        int exitCode = 0;
 
         // 반복문 생성
         while (true) {
 
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            int a = scanner.nextInt();
+            int a = scan.nextInt();
 
             System.out.print("두 번째 숫자를 입력하세요: ");
-            int b = scanner.nextInt();
+            int b = scan.nextInt();
 
             System.out.print("사칙연산 기호를 입력하세요: ");
-            char c = scanner.next().charAt(0);
-
-            Calculator cal = new Calculator();
+            char c = scan.next().charAt(0);
 
             // 결과값 출력 전 정상적인 연산인지 검증
             if (c != '+' && c != '-' && c != '*' && c != '/')
@@ -31,11 +34,22 @@ public class Main {
             else
                 System.out.println("결과: " + cal.calculate(a, b, c));
 
-
             // 반복문 종료 여부 확인
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            String exit = scanner.next();
-            if (exit.equals("exit")) {
+            String exit = scan.next();
+
+            switch (exit) {
+                case "exit" -> exitCode = 1;
+                case "remove" -> {
+                    System.out.print("삭제 전: ");
+                    cal.getResult();
+                    System.out.print("삭제 후: ");
+                    cal.removeResult();
+                    cal.getResult();
+                }
+            }
+
+            if (exitCode == 1) {
                 break;
             }
 
