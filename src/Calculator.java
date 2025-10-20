@@ -1,5 +1,3 @@
-package method;
-
 import java.util.ArrayList;
 
 public class Calculator {
