@@ -31,7 +31,7 @@ public class App {
             else if (b == 0 && c == '/')
                 System.out.println("0으로는 나눌 수 없습니다.");
 
-            /* 정상적인 연산일 경우 결과 출력 */
+            /* 정상 연산일 경우, 결과 출력 및 컬렉션에 결과값 저장 */
             else {
                 System.out.println("결과: " + cal.calculate(a, b, c));
                 cal.setResult(cal.calculate(a, b, c));
@@ -40,8 +40,12 @@ public class App {
             /* 반복문 종료 여부 확인 */
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String command = scan.next();
+
             switch (command) {
+                /* 반복문 종료 */
                 case "exit" -> exitCode = 1;
+
+                /* 컬렉션 확인 후 삭제 */
                 case "remove" -> {
                     System.out.print("삭제 전: ");
                     cal.getResult();
