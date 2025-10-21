@@ -1,16 +1,18 @@
 import java.util.Scanner;
 
-public class ArithmeticCalculator {
+public class ArithmeticCalculator<T> {
 
-    /* 계산하고 결과값을 반환하는 메서드 생성 */
-    public int calculate(int x, int y, OperatorType operator) {
-        return operator.calculate(x, y);
+    private T item;
+
+    public ArithmeticCalculator(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return this.item;
     }
 
     public static void main(String[] args) {
-
-        /* 기본 인스턴스 생성 */
-        ArithmeticCalculator calc = new ArithmeticCalculator();
 
         /* 스캐너 생성 */
         Scanner sc = new Scanner(System.in);
@@ -19,10 +21,10 @@ public class ArithmeticCalculator {
         while (true) {
 
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            int a = sc.nextInt();
+            ArithmeticCalculator<Double> a = new ArithmeticCalculator<>(sc.nextDouble());
 
             System.out.print("두 번째 숫자를 입력하세요: ");
-            int b = sc.nextInt();
+            ArithmeticCalculator<Double> b = new ArithmeticCalculator<>(sc.nextDouble());
 
             System.out.print("사칙연산 기호를 입력하세요: ");
             char c = sc.next().charAt(0);
@@ -30,7 +32,7 @@ public class ArithmeticCalculator {
             /* 예외 발생 체크 */
             try {
                 OperatorType op = OperatorType.fromType(c);
-                int result = calc.calculate(a, b, op);
+                double result = op.calculate(a.getItem(), b.getItem());
                 System.out.println("결과: " + result);
             } catch (Exception e) {
                 System.out.println(e.getMessage());

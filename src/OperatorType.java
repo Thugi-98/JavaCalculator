@@ -1,24 +1,24 @@
 public enum OperatorType {
 
     sum('+') {
-        public int calculate(int a, int b) {
+        public double calculate(double a, double b) {
             return a + b;
         }
     },
     sub('-') {
-        int calculate(int a, int b) {
+        double calculate(double a, double b) {
             return a - b;
         }
     },
     mul('*') {
-        int calculate(int a, int b) {
+        double calculate(double a, double b) {
             return a * b;
         }
     },
     div('/') {
-        int calculate(int a, int b) {
+        double calculate(double a, double b) {
             /* 0으로 나눌 경우 예외 발생 */
-            if(b == 0) throw new IllegalArgumentException("0으로는 나눌 수 없습니다.");
+            if (b == 0) throw new IllegalArgumentException("0으로는 나눌 수 없습니다.");
             return a / b;
         }
     };
@@ -32,7 +32,7 @@ public enum OperatorType {
     }
 
     /* 연산자 별 활동 주기 */
-    abstract int calculate(int a, int b);
+    abstract double calculate(double a, double b);
 
     /* 입력된 문자로 연산 방법 탐색 */
     public static OperatorType fromType(char operator) {
